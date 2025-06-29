@@ -107,7 +107,6 @@ const App = () => {
 
         const prompt = `
             ΣΗΜΑΝΤΙΚΟ:Με βάση τις παρακάτω προτιμήσεις του χρήστη, προτείνετε μια ρακέτα τένις ή padel. Φρόντισε οι προτάσεις να είναι αυστηρά βάσει τωνν προτιμήσεων του χρήστη.
-            ΣΗΜΑΝΤΙΚΟ: Όλες οι προτάσεις ΠΡΕΠΕΙ να βασίζονται σε ρακέτες και πληροφορίες που θα βρεθούν στο 'racket.gr'. ΜΗΝ αναφέρεστε σε άλλες πηγές ή μάρκες/μοντέλα που δεν βρίσκονται συνήθως σε έναν εξειδικευμένο Έλληνα λιανοπωλητή ρακετών.
             Όλες οι απαντήσεις ΠΡΕΠΕΙ να είναι στα Ελληνικά.
             Δώστε 3-5 προτάσεις ρακετών. Για κάθε πρόταση, συμπεριλάβετε:
             - Όνομα Ρακέτας
@@ -121,7 +120,7 @@ const App = () => {
             Προφίλ Χρήστη:
             Άθλημα: ${userData.sport === 'tennis' ? 'Τένις' : 'Padel'}
             Επίπεδο: ${userData.level === 'beginner' ? 'Αρχάριος' : userData.level === 'intermediate' ? 'Μεσαίο' : userData.level === 'advanced' ? 'Προχωρημένος' : 'Επαγγελματίας'}
-            Προϋπολογισμός: €${userData.budget}
+            Προϋπολογισμός: 'Μέχρι'€${userData.budget}
             Στυλ Παιχνιδιού: ${userData.playingStyle === 'all-around' ? 'Ολόπλευρο' : userData.playingStyle === 'power-hitter' ? 'Δυνατό χτύπημα' : userData.playingStyle === 'control-player' ? 'Παίκτης ελέγχου' : userData.playingStyle === 'defensive' ? 'Αμυντικό' : userData.playingStyle === 'attacking' ? 'Επιθετικό' : 'Τεχνικό'}
             Ηλικιακή Ομάδα: ${userData.ageGroup === 'junior' ? 'Νέοι' : userData.ageGroup === 'adult' ? 'Ενήλικες' : 'Ηλικιωμένοι'}
             Φυσική Κατάσταση: ${userData.physicalCondition === 'excellent' ? 'Εξαιρετική' : userData.physicalCondition === 'good' ? 'Καλή' : userData.physicalCondition === 'average' ? 'Μέτρια' : 'Ανάκτηση από τραυματισμό'}
