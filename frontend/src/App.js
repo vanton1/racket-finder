@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // === ΡΥΘΜΙΣΗ API KEY & BACKEND URL ===
 // Αυτό το κλειδί απαιτείται ΜΟΝΟ αν εκτελείτε την εφαρμογή
 // εκτός του περιβάλλοντος του Google Canvas ΚΑΙ χωρίς backend proxy server.
 // Εάν χρησιμοποιείτε backend proxy server, το κλειδί διαχειρίζεται εκεί.
-// Εάν εκτελείτε στο Canvas, το κλειδί παρέχεται αυτόματα.
+// Εάν εκτελείτε στο Canvas, το κλειzé παρέχεται αυτόματα.
+const USER_PROVIDED_API_KEY_DIRECT_USE = "YOUR_GEMINI_API_KEY_HERE"; // Αφήστε ως έχει στο Canvas
 
 // Εάν χρησιμοποιείτε backend proxy server (π.χ. Node.js server.js):
 //   - Στο περιβάλλον ανάπτυξης (όταν τρέχετε `npm start`) και έχετε ρυθμίσει το "proxy" στο package.json,
@@ -107,6 +108,7 @@ const App = () => {
 
         const prompt = `
             ΣΗΜΑΝΤΙΚΟ:Με βάση τις παρακάτω προτιμήσεις του χρήστη, προτείνετε μια ρακέτα τένις ή padel. Φρόντισε οι προτάσεις να είναι αυστηρά βάσει τωνν προτιμήσεων του χρήστη.
+            ΣΗΜΑΝΤΙΚΟ: Όλες οι προτάσεις ΠΡΕΠΕΙ να βασίζονται σε ρακέτες και πληροφορίες που θα βρεθούν στο 'racket.gr'. ΜΗΝ αναφέρεστε σε άλλες πηγές ή μάρκες/μοντέλα που δεν βρίσκονται συνήθως σε έναν εξειδικευμένο Έλληνα λιανοπωλητή ρακετών.
             Όλες οι απαντήσεις ΠΡΕΠΕΙ να είναι στα Ελληνικά.
             Δώστε 3-5 προτάσεις ρακετών. Για κάθε πρόταση, συμπεριλάβετε:
             - Όνομα Ρακέτας
@@ -127,7 +129,7 @@ const App = () => {
             Προτιμώμενη Μάρκα (προαιρετικό): ${userData.preferredBrand || 'Καμία'}
             Πρόσθετες Σημειώσεις (προαιρετικό): ${userData.additionalNotes || 'Καμία'}
 
-            Παρακαλώ δώστε την απάντηση ως ένα JSON array από αντικείμενα, ως εξής:
+            Παρακαλώ δώστε την απάντηση ως ένα JSON array από αντικείμενα, ως follows:
             [
               {
                 "racketName": "...",
@@ -596,8 +598,7 @@ const App = () => {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-100 flex flex-col items-center justify-center py-10 px-4 font-inter">
-            {/* Tailwind CSS CDN */}
-            <script src="https://cdn.tailwindcss.com"></script>
+            {/* Inline CSS for global styles and font import */}
             <style>
                 {`
                 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
@@ -637,8 +638,17 @@ const App = () => {
             </style>
 
             <header className="w-full max-w-2xl text-center mb-10">
+                {/* Λογότυπο Racket.gr */}
+                <a href="https://racket.gr" target="_blank" rel="noopener noreferrer">
+                    <img
+                        src="/racket_logo.webp" // Path to your logo in the public folder
+                        alt="Racket.gr Logo"
+                        className="mx-auto h-20 w-auto mb-4 rounded-md" // Adjust size and margin as needed
+                        onError={(e) => { e.target.onerror = null; e.target.src="https://placehold.co/150x50/aabbcc/ffffff?text=Logo"; }} // Fallback image
+                    />
+                </a>
                 <h1 className="text-4xl sm:text-5xl font-extrabold text-indigo-800 drop-shadow-md">
-                    Εύρεση Ρακέτας απο το racket.gr
+                    Εύρεση Ρακέτας
                 </h1>
                 <p className="mt-3 text-lg text-gray-600">
                     Ο προσωπικός σας βοηθός για την εύρεση της τέλειας ρακέτας τένις ή padel.
